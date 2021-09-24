@@ -6,3 +6,9 @@ Course 2021 Fall
 Advisor: Jyun-Ming Chen
 ## About me
 Author: 李敬華
+
+My email: u10706128@ms.ttu.edu.tw
+
+My works on gh-pages: 
+## Current progress
+1. hw0()
