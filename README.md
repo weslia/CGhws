@@ -5,7 +5,7 @@ Course 2021 Fall
 
 Advisor: Jyun-Ming Chen
 ## About me
-Author: 李敬華
+Author: 李敬華 JING-HUA LEE
 
 My email: u10706128@ms.ttu.edu.tw
 
