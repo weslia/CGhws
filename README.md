@@ -1,5 +1,5 @@
-# Computer Graphics CGI (Computer-Generated Imagery)
-# 計算機圖學
+# Computer Graphics CGI (Computer-Generated Imagery) 
+計算機圖學
 
 Course 2021 Fall
 
