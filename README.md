@@ -8,6 +8,6 @@ Author: 李敬華 JING-HUA LEE
 
 My email: u10706128@ms.ttu.edu.tw
 
-My works on gh-pages: [link]()
+My works on gh-pages: https://weslia.github.io/CGhws/index.html
 ## Current progress
-1. [hw0]() (製作一個相似 BoxGeometry 的 CylinderGeometr)
+1. [hw0](https://weslia.github.io/CGhws/hw0/hw0.html) (製作一個相似 BoxGeometry 的 CylinderGeometr)
