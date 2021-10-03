@@ -46,7 +46,7 @@ function init () {
 	
 	window.addEventListener('resize', onWindowResize, false);
 	///////////////////////////////////////////////////////////////
-	var cubeGeometry = new THREE.CylinderGeometry (1,1,3,4);
+	var cubeGeometry = new THREE.CylinderGeometry (1,1,3,40);
 	var cubeMaterial = new THREE.MeshNormalMaterial();
 	cube = new THREE.Mesh (cubeGeometry, cubeMaterial);
 	cube.rotation.x = Math.PI/2;
