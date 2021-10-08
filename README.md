@@ -6,7 +6,7 @@ Advisor: Jyun-Ming Chen
 ## About me
 Author: 李敬華 JING-HUA LEE
 
-My email: [u10706128@ms.ttu.edu.tw](https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox)
+My email: [u10706128@ms.ttu.edu.tw](https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox?compose=GTvVlcRzDsfXZnftdpZVnJhWTdzlfVdzGwhTqhZMGhvwMfDsfmwnFlvFXghCPqNCRDfClKCmGZvjw)
 
 My works on gh-pages: https://weslia.github.io/CGhws/index.html
 ## Current progress
