@@ -11,4 +11,4 @@ My email: [u10706128@ms.ttu.edu.tw](https://mail.google.com/mail/u/0/?tab=rm&ogb
 My works on gh-pages: https://weslia.github.io/CGhws/index.html
 ## Current progress
 1. [hw0](https://weslia.github.io/CGhws/hw0/hw0.html) (製作一個相似 BoxGeometry 的 CylinderGeometr)
-2. [hw1](https://weslia.github.io/CGhws/hw1/hw1.html) (製作簡單的碼表)
+2. [hw1](https://weslia.github.io/CGhws/hw1/hw1.html) (製作一個用於60秒內之倒數計時碼表)
