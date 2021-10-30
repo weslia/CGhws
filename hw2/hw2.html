@@ -22,10 +22,10 @@ body {
 <div id="info">HW2: 
 </div>
 
+<script src="https://jyunming-chen.github.io/tutsplus/js/KeyboardState.js"></script>
 <script type="module">
 import * as THREE from "https://threejs.org/build/three.min.js";
 import {OrbitControls} from "https://threejs.org/examples/js/controls/OrbitControls.js";
-import {KeyboardState} from "https://jyunming-chen.github.io/tutsplus/js/KeyboardState.js";
 import {buildVehicle, makeRect, Check_Intersect, traverse} from "./functionNeed.js";
 
 var camera, camera3PV, scene, renderer;
@@ -74,7 +74,6 @@ function init() {
   
   // disable OrbitControl keys
   controls.enableKeys = false;
-  
   document.body.appendChild(renderer.domElement);
   //double scene
   initHUD();
