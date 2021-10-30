@@ -12,4 +12,4 @@ My works on gh-pages: https://weslia.github.io/CGhws/index.html
 ## Current progress
 1. [hw0](https://weslia.github.io/CGhws/hw0/hw0.html) (製作一個相似 BoxGeometry 的 CylinderGeometr)
 2. [hw1](https://weslia.github.io/CGhws/hw1/hw1.html) (製作一個用於60秒內之倒數計時碼表)
-2. [hw2](https://weslia.github.io/CGhws/hw2/hw2.html) (製作一個用於60秒內之倒數計時碼表)
+2. [hw2](https://weslia.github.io/CGhws/hw2/hw2.html) (有碰撞的汽車行駛模擬)
