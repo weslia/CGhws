@@ -204,7 +204,7 @@ function init() {
   angle = 0.0;
   	
   car = buildVehicle();
-  car.add(camera ,camera3PV);
+  car.add(camera3PV);
   scene.add(car);
 
   for(let i=0;i<4;i++){
@@ -215,12 +215,10 @@ function init() {
     let plusOrMinus = Math.random() < 0.5 ? 1 : -1;
     let plusOrMinus2 = Math.random() < 0.5 ? 1 : -1;
     pillar.position.set ((Math.random()*70+30)*plusOrMinus, 10, (Math.random()*70+30)*plusOrMinus2);
-    
   }
 }
 
 function update(dt) {
-  camera.rotation.z = -Math.PI/2;
   keyboard.update();
   
   if (vel.length() > 0) {
