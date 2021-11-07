@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#info {
+  position: absolute;
+  top: 0px;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  color: #ffff00
+}
+
+body {
+  overflow: hidden;
+}
+</style>
+</head>
+<body>
+<div id="info">hw3: Modeling, Multiple Viewports
+<button id='frontView'>Front</button>
+</div>
+<script src="https://threejs.org/build/three.min.js"></script>
+<script src="https://threejs.org/examples/js/controls/OrbitControls.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+var camera, cameraF, scene, renderer;
+var gridXZ;
+var frontView = false;
+var ww = 0;
+var hh = 0;
+
+(function() {
+  Math.clamp = function(val,min,max){
+    return Math.min(Math.max(val,min),max);
+  }})();
+
+$('#frontView').click ( function() {
+	frontView = ! frontView; // toggle
+  gridXZ.visible =! gridXZ.visible;
+});
+
+init();
+animate();
+
+function init() {
+
+  scene = new THREE.Scene();
+
+  //free camera
+  camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
+  camera.position.set (0,25,30);
+
+	// front
+  cameraF = new THREE.OrthographicCamera (-10,10,10,-10, -4,40);
+  cameraF.position.set (0,0,20);
+
+  // right
+  cameraR = new THREE.OrthographicCamera (-10,10,10,-10, -4,40);
+  cameraR.position.set (20,0,0);
+  cameraR.lookAt (0,0,0);
+  // left
+  cameraL = new THREE.OrthographicCamera (-10,10,10,-10, -4,40);
+  cameraL.position.set (-20,0,0);
+  cameraL.lookAt (0,0,0);
+  // top
+  cameraT = new THREE.OrthographicCamera (-10,10,10,-10,-400,400);
+  cameraT.position.set (0,20,0);
+  cameraT.up.set (0,0,-1); // -Z
+  cameraT.lookAt (0,0,0);
+  
+  let light = new THREE.PointLight(0xffffff);
+  light.position.set(10, 15, 10);
+  scene.add(light);
+  let light2 = new THREE.PointLight(0xffffff);
+  light2.position.set(-10, -15, 10);
+  scene.add(light2);
+
+  renderer = new THREE.WebGLRenderer();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x888888);
+
+  let controls = new THREE.OrbitControls(camera, renderer.domElement);
+
+  document.body.appendChild(renderer.domElement);
+  ////////////////////////////////////////////////////////////////////////
+
+  var length = 16, width = 8,height = 8, RR = length/4, rr = length/8;
+  var partGroup = new THREE.Group();
+  
+  gridXZ = new THREE.GridHelper(20, 20, 'red', 'white');
+  gridXZ.position.set(0, -height/2, 0);
+  scene.add(gridXZ);
+  //part1
+  var shapePart1 = new THREE.Shape(); 
+	// CW (CCW is also ok)
+  shapePart1.moveTo(RR, 0);
+  shapePart1.absarc(RR, RR, RR, Math.PI*1.5, Math.PI*3.5, false);
+  shapePart1.moveTo(RR, RR/2);
+  shapePart1.absarc(RR, RR, RR/2, Math.PI*1.5, Math.PI*3.5, true);
+  var extrudeSettingsPart1 = {
+    steps: 1,
+    depth: 5/8*height,
+    bevelEnabled: false,
+  };
+  //part2
+  var shapePart2 = new THREE.Shape();
+  shapePart2.moveTo(RR, 0);
+  shapePart2.absarc(RR, RR, RR, Math.PI*1.5, Math.PI*3.5, false);
+  shapePart2.moveTo(RR, RR/4, 5/8*width);
+  shapePart2.absarc(RR, RR, 3/4*RR, Math.PI*1.5, Math.PI*3.5, true);
+  var extrudeSettingsPart2 = {
+    steps: 1,
+    depth: 3/8*height,
+    bevelEnabled: false,
+  };
+  //part3
+  var shapePart3 = new THREE.Shape();
+  shapePart3.moveTo(RR, 0);
+  shapePart3.lineTo(length-rr, 0);
+  shapePart3.absarc(length-rr, rr, rr, Math.PI*1.5, Math.PI*2, false);
+  shapePart3.lineTo(length, width-rr);
+  shapePart3.absarc(length-rr, width-rr, rr, 0, Math.PI*0.5, false);
+  shapePart3.lineTo(RR, width);
+  shapePart3.lineTo(RR, width-RR/2);
+  shapePart3.absarc(RR, RR, RR, Math.PI*0.5, Math.PI*(-0.5), true);
+  shapePart3.lineTo(RR, 0);
+  shapePart3.absarc(length-rr, rr, rr/2, Math.PI*1.5, Math.PI*2.5, true);
+  shapePart3.moveTo(length-rr, width-3/2*rr);
+  shapePart3.absarc(length-rr, width-rr, rr/2, Math.PI*1.5, Math.PI*3.5, true);
+  shapePart3.moveTo(length-rr, 3/2*rr);
+  shapePart3.absarc(length-rr, rr, rr/2, Math.PI*0.5, Math.PI*2.5, true);
+  var extrudeSettingsPart3 = {
+    steps: 1,
+    depth: 3/8*height,
+    bevelEnabled: false,
+  };
+/*
+	let loader = new THREE.TextureLoader()
+  loader.setCrossOrigin ("")
+  let map = loader.load ("https://i.imgur.com/p8CRm9W.jpg")
+  map.wrapS = map.wrapT = THREE.WrapRepeating
+  map.repeat.set (.1,.1)
+  var material = new THREE.MeshLambertMaterial({
+    color: 0x00ff00, map: map
+  });*/
+  //part1
+  var geometryPart1 = new THREE.ExtrudeGeometry(shapePart1, extrudeSettingsPart1);
+  var material = new THREE.MeshPhongMaterial({ color: 0xbcbcbc, shininess: 100 } );
+  var mesh1 = new THREE.Mesh(geometryPart1, material);
+  mesh1.rotation.x = -Math.PI/2;
+  partGroup.add(mesh1);
+  //part2
+  var geometryPart2 = new THREE.ExtrudeGeometry(shapePart2, extrudeSettingsPart2);
+  var mesh2 = new THREE.Mesh(geometryPart2, material);
+  mesh2.rotation.x = -Math.PI/2;
+  mesh2.position.set (0, 5/8*height, 0);
+  partGroup.add(mesh2);
+  //part3
+  var geometryPart3 = new THREE.ExtrudeGeometry(shapePart3, extrudeSettingsPart3);
+  var mesh3 = new THREE.Mesh(geometryPart3, material);
+  mesh3.rotation.x = -Math.PI/2;
+  mesh3.position.set (0, 2/8*height, 0);
+  
+  partGroup.add(mesh3);
+  partGroup.position.set(-length/2,-height/2,width/2);
+  scene.add(partGroup);
+  //mesh.position.set (-7.5, -5, -2.5);
+  ////////////////////////////////
+  renderer.autoClear = false;
+  
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  render();
+}
+
+function render() {
+  renderer.setClearColor(0x383838);
+  if(frontView == true && (ww < window.innerWidth && hh < window.innerHeight)){
+    ww += window.innerWidth/10;
+    hh += window.innerHeight/10;
+  }else if(frontView == false && (ww > 0 && hh > 0)){
+    ww -= window.innerWidth/10;
+    hh -= window.innerHeight/10;
+  }
+  ww = Math.clamp (ww, 0, window.innerWidth);
+  hh = Math.clamp (hh, 0, window.innerHeight);
+  renderer.clear();
+  if(ww <= window.innerWidth/2 ){
+    renderer.setViewport (0,0, window.innerWidth, window.innerHeight);
+    renderer.render (scene, camera);
+  }
+  if(ww > 0){
+    renderer.setViewport (0,0, ww/2, hh/2);
+    renderer.render(scene, cameraF);
+    
+    renderer.setViewport (0,hh/2, ww/2, hh/2);
+    renderer.render(scene, cameraT);
+
+    renderer.setViewport (ww/2,0, ww/2, hh/2);
+    renderer.render(scene, cameraL);
+
+    renderer.setViewport (ww/2,hh/2,ww/2, hh/2);
+    renderer.render(scene, cameraR);
+  }
+  
+
+    
+  /*
+  if (frontView === true){
+    renderer.clear();
+    renderer.setViewport (0,0, ww/2, hh/2);
+    renderer.render(scene, cameraF);
+    
+    renderer.setViewport (0,hh/2, ww/2, hh/2);
+    renderer.render(scene, cameraT);
+  }
+  else{
+    renderer.setViewport (0,0, ww, hh);
+    renderer.render (scene, camera);
+  }
+  */
+}
+</script>
+</body>
+
+</html>
