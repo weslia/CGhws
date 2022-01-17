@@ -24,8 +24,8 @@ function init() {
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000);
-    camera.position.y = 160;
-    camera.position.z = 400;
+    camera.position.y = 100;
+    camera.position.z = 250;
 
     let controls = new OrbitControls (camera, renderer.domElement);
     window.addEventListener('resize', onWindowResize, false);
@@ -80,7 +80,7 @@ function init() {
         ].join("\n")
     });
     //var geometry = new THREE.TorusKnotGeometry(20, 5, 100, 16);
-    var size = 7.5;
+    var size = 5;
     var geometry = new TeapotGeometry (size);
     
     for(var i=-5; i<5; i++){

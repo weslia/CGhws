@@ -89,8 +89,8 @@ function init() {
     scene = new THREE.Scene();
 
     camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 10000);
-    camera.position.y = 160;
-    camera.position.z = 400;
+    camera.position.y = 100;
+    camera.position.z = 250;
 
     let controls = new THREE.OrbitControls(camera, renderer.domElement);
     window.addEventListener('resize', onWindowResize, false);
@@ -102,20 +102,20 @@ function init() {
     scene.add (pointLight);
     scene.add (new THREE.PointLightHelper(pointLight, 5));
 
-		var ambientLight = new THREE.AmbientLight(0x111111);
+	var ambientLight = new THREE.AmbientLight(0x111111);
     scene.add(ambientLight);
 
  
     let meshMaterial = new THREE.ShaderMaterial({
         uniforms: {
-        lightpos: {type: 'v3', value: new THREE.Vector3()}
+            lightpos: {type: 'v3', value: new THREE.Vector3()}
         },
         vertexShader: document.getElementById('myVertexShader').textContent,
         fragmentShader: document.getElementById('myFragmentShader').textContent
     });
 
     //var geometry = new THREE.TorusKnotGeometry(20, 5, 100, 16);
-    var size = 7.5;
+    var size = 5;
     var geometry = new THREE.TeapotGeometry (size);
     
     for(var i=-5; i<5; i++){
